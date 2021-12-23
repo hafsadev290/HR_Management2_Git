@@ -1,7 +1,9 @@
 using HR_Management2.Data;
+using HR_Management2.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +28,10 @@ namespace HR_Management2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // link with DB
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // inject Identity 
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +53,10 @@ namespace HR_Management2
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // mandatory, to manage the logins/logouts to the app
+            app.UseAuthentication();
+
 
             app.UseEndpoints(endpoints =>
             {

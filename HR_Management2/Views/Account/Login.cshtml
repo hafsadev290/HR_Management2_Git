@@ -1,0 +1,55 @@
+﻿@model HR_Management2.Models.ViewModels.LoginVM
+
+<h2>Sign In</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <section id="loginForm">
+            <form id="account" method="post" asp-action="Login" asp-controller="Account">
+                <h4>Use your registered email id and password to login.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="col-md-2" asp-for="Email"></label>
+                    <div class="col-md-10">
+                        <input class="form-control" asp-for="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2" asp-for="Password"></label>
+                    <div class="col-md-10">
+                        <input class="form-control" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-md-10 offset-2 custom-checkbox">
+                        <label asp-for="RememberMe" class="pr-4 pl-0">
+                            <input type="checkbox" asp-for="RememberMe" />
+                        </label>
+                        Remember Me ?
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10 offset-md-2">
+                        <input type="submit" value="Log in" class="btn btn-success" />
+                    </div>
+                </div>
+
+                <p class="col-md-10 offset-md-2">
+                    <a asp-action="Register">Sign Up</a>
+                </p>
+
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

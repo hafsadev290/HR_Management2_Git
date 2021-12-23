@@ -1,0 +1,68 @@
+﻿@model HR_Management2.Models.ViewModels.RegisterVM
+
+<h2>Register</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <section id="loginForm">
+            <form id="account" method="post" asp-action="Register" asp-controller="Account">
+                <h4>Create a new account.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="col-md-2" asp-for="Name"></label>
+                    <div class="col-md-10">
+                        <input class="form-control" asp-for="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2" asp-for="Email"></label>
+                    <div class="col-md-10">
+                        <input class="form-control" asp-for="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2" asp-for="Password"></label>
+                    <div class="col-md-10">
+                        <input class="form-control" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2" asp-for="ConfirmPassword"></label>
+                    <div class="col-md-10">
+                        <input class="form-control" asp-for="ConfirmPassword" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2" asp-for="RoleName"></label>
+                    <div class="col-md-10">
+                        <select asp-for="RoleName" asp-items="@HR_Management2.Data.Helper.GetRoles()" class="form-control">
+                            <option selected>-- Select a Role --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10 offset-md-2">
+                        <input type="submit" value="Register" class="btn btn-success" />
+                    </div>
+                </div>
+
+                <p class="col-md-10 offset-md-2">
+                    <a asp-action="Login">Sign In</a>
+                </p>
+
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
