@@ -8,7 +8,7 @@ namespace HR_Management2.Data
 {
     public static class Helper
     {
-        public static string Admin = "Admin";
+        public const string Admin = "Admin";
         public static string Employee = "Employee";
 
         public static List<SelectListItem> GetRoles()

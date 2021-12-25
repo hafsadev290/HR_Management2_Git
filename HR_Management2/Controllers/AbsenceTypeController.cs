@@ -1,5 +1,6 @@
 ﻿using HR_Management2.Data;
 using HR_Management2.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace HR_Management2.Controllers
 {
+    [Authorize(Roles = Helper.Admin)]
     public class AbsenceTypeController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -1,6 +1,7 @@
 ﻿using HR_Management2.Data;
 using HR_Management2.Models;
 using HR_Management2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace HR_Management2.Controllers
 {
+    [Authorize(Roles = Helper.Admin)]
     public class AbsenceController : Controller
     {
         private readonly ApplicationDbContext _db;
