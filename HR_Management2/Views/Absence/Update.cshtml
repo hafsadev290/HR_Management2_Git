@@ -1,0 +1,65 @@
+﻿@model HR_Management2.Models.ViewModels.AbsenceVM
+
+<form method="post" asp-action="Update">
+    <input asp-for="Absence.Id" hidden />
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Update Absence</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Absence.StartDate"></label>
+                    </div>
+                    <div class="col-3">
+                        <label asp-for="Absence.Duration"></label>
+                    </div>
+                    <div class="col-3">
+                        <label asp-for="AbsenceType"></label>
+                    </div>
+                    <div class="col-3">
+                        <label asp-for="Employee"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <input asp-for="Absence.StartDate" class="form-control" />
+                        <!--to show error if there is any-->
+                        <span class="text-danger" asp-validation-for="Absence.StartDate"></span>
+                    </div>
+                    <div class="col-3">
+                        <input asp-for="Absence.Duration" class="form-control" />
+                        <!--to show error if there is any-->
+                        <span class="text-danger" asp-validation-for="Absence.Duration"></span>
+                    </div>
+                    <div class="col-3">
+                        <select asp-for="Absence.AbsenceTypeId" asp-items="@Model.AbsenceType" class="form-control">
+                            <option selected>--Select Absence Type --</option>
+                        </select>
+                        <!--to show error if there is any-->
+                        <span class="text-danger" asp-validation-for="Absence.AbsenceTypeId"></span>
+                    </div>
+                    <div class="col-3">
+                        <select asp-for="Absence.EmployeeId" asp-items="@Model.Employee" class="form-control">
+                            <option selected>--Select Employee --</option>
+                        </select>
+                        <!--to show error if there is any-->
+                        <span class="text-danger" asp-validation-for="Absence.EmployeeId"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-success w-75" value="Update" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-primary w-75">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
