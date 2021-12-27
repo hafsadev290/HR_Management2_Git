@@ -1,0 +1,42 @@
+﻿@model IEnumerable<HR_Management2.Models.AbsenceType>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Absence Types\' list</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="AbsenceType" asp-action="Create" class="btn btn-dark">Create a new absence type</a>
+        </div>
+    </div>
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <tr>
+                <th>Absence Type</th>
+
+                <th>Actions</th>
+            </tr>
+            @foreach (var abs_type in Model)
+            {
+                <tr>
+
+                    <td width="50%">@abs_type.AbsenceName</td>
+
+                    <td width="50%">
+                        <div class="w-100 btn-group" role="group">
+                            <a asp-controller="AbsenceType" asp-action="Update" asp-route-Id="@abs_type.Id"
+                               class="btn btn-primary">Update</a>
+                            <a asp-controller="AbsenceType" asp-action="Delete" asp-route-Id="@abs_type.Id"
+                               class="btn btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <span class="text-danger">No element found !</span>
+    }
+</div>
