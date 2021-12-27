@@ -20,6 +20,7 @@ namespace HR_Management2.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Message = Newtonsoft.Json.JsonConvert.SerializeObject(new List<int> { 1, 3, 4, 6, 2 });
             return View();
         }
 

@@ -50,7 +50,7 @@
                     <span asp-validation-for="ExpectedPeriod" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Add" class="btn btn-primary" />
                 </div>
             </form>
         </div>
@@ -60,7 +60,11 @@
         <a asp-action="Index">Back to List</a>
     </div>
 }
+else
+{
+    <h4 class="text-danger">You must be logged in as an admin.</h4>
+}
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
