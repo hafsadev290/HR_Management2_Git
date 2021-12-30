@@ -3,10 +3,7 @@
 @if (signInManager.IsSignedIn(User))
 {
 <form method="post" id="logoutForm" asp-action="Logout" asp-controller="Account">
-    <ul class="nav navbar-nav">
-        <li>Hello, @User.Identity.Name !</li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
-    </ul>
+    
     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
         <ul class="navbar-nav flex-grow-1">
             <li class="nav-item">
@@ -21,6 +18,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="AbsenceType" asp-action="Index">Absence Types</a>
+            </li>
+            <li class="nav-item dropright">
+                Hello, @User.Identity.Name !
+            </li>
+            <li class="nav-item dropright">
+                <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
             </li>
         </ul>
     </div>

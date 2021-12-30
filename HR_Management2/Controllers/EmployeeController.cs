@@ -1,5 +1,6 @@
 ﻿using HR_Management2.Data;
 using HR_Management2.Models;
+using HR_Management2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HR_Management2.Controllers
 {
-    [Authorize(Roles = Helper.Admin)]
+    //[Authorize(Roles = Helper.Admin)]
     public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -87,6 +88,49 @@ namespace HR_Management2.Controllers
             }).ToList();
             //IEnumerable<Absence> absences = _db.Absences.Where(x => x.EmployeeId == id);
             return View(absences);
+        }
+
+
+        public IActionResult ListAbsences_chart(int? id)
+        { 
+            var months = _db.Absences
+                    .Where(x => x.EmployeeId == id)
+                    .GroupBy(a => a.StartDate.Month)
+                    
+                    .Select(a => new ListAbsences
+                    {
+                        Total = a.Key
+                    }).ToList();
+
+            List<int> listMonths=new List<int>();
+            foreach (var item in months)
+                listMonths.Add(item.Total);
+
+            var durations = _db.Absences
+                        .Where(x => x.EmployeeId == id)
+                        .Select(abs => new Absence
+                        {
+                            Id = abs.Id,
+                            StartDate = abs.StartDate,
+                            Duration = abs.Duration
+                        })
+
+                        .GroupBy(s => new { s.StartDate.Year, s.StartDate.Month })
+                        .Select(a => new ListAbsences
+                        {
+                            Total = a.Sum(w => w.Duration)
+                        })
+                        .ToList();
+
+            List<int> listDurations = new List<int>();
+            foreach (var item in durations)
+                listDurations.Add(item.Total);
+
+            ViewBag.Months = Newtonsoft.Json.JsonConvert.SerializeObject(listMonths);
+            ViewBag.Durations = Newtonsoft.Json.JsonConvert.SerializeObject(listDurations);
+            ViewBag.Amount = listMonths.Count;
+            return View();
+            
         }
 
     }

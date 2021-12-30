@@ -1,0 +1,99 @@
+﻿@*@model IEnumerable<HR_Management2.Models.ViewModels.ListAbsences>*@
+@inject Microsoft.AspNetCore.Identity.SignInManager<HR_Management2.Models.AppUser> signInManager
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">List of Absences of selected employee</h2>
+        </div>
+
+    </div>
+    @if (ViewBag.Amount > 0)
+    {
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class='card-header'>
+                        Bar chart
+                    </div>
+                    <div class='card-body'>
+                        <canvas class="my-4 h-25" id='bar'></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class='card-header'>
+                        Pie chart
+                    </div>
+                    <div class='card-body'>
+                        <canvas class="my-4 h-25" id='pie'></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+    <p class="text-danger">No absences recorded for this employee.</p>
+    }
+</div>
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script type="text/javascript">
+
+    var array_ = @ViewBag.Months;
+
+    var array_1 = @ViewBag.Durations;
+
+    var barchart = document.getElementById('bar').getContext("2d");
+    var mybarChart = new Chart(barchart, {
+        type: 'bar',
+        data: {
+            labels: array_,
+            datasets: [{
+                label: "Bar Chart",
+                data: array_1,
+                backgroundColor: 'rgba(6,128,250)'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+
+    var piechart = document.getElementById('pie').getContext("2d");
+    var mypieChart = new Chart(piechart, {
+        type: 'pie',
+        data: {
+            labels: array_,
+            datasets: [{
+                label: "Pie Chart",
+                data: array_1,
+                backgroundColor: 'rgba(6,128,25)'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                   ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
