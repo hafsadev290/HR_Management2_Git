@@ -1,8 +1,7 @@
 ﻿@*@model IEnumerable<HR_Management2.Models.ViewModels.ListAbsences>*@
 @inject Microsoft.AspNetCore.Identity.SignInManager<HR_Management2.Models.AppUser> signInManager
 
-@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-{
+
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
@@ -35,10 +34,7 @@
             </div>
         </div>
     }
-    else
-    {
-    <p class="text-danger">No absences recorded for this employee.</p>
-    }
+    
 </div>
 }
 

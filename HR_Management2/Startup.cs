@@ -57,10 +57,11 @@ namespace HR_Management2
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            
 
             // mandatory, to manage the logins/logouts to the app
             app.UseAuthentication();
+            app.UseAuthorization();
 
 
             app.UseEndpoints(endpoints =>

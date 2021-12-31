@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HR_Management2.Controllers
 {
-    //[Authorize(Roles = Helper.Admin)]
+    [Authorize(Roles = Helper.Admin)]
     public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _db;
